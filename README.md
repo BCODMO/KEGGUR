@@ -1,6 +1,8 @@
 # KEGGUR
 A suite of perl scripts for generating "good enough" phylogenetic databases using the Kyoto Encyclopedia of Genes and Genomes (KEGG)
 
+NOTE: view this file as raw text, not html, as syntax assignments are represented using <> notation.
+
 KEGGUR v 0.1
 
 readme.txt
