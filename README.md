@@ -7,7 +7,7 @@ KEGGUR v 0.1
 
 readme.txt
 
-29 September 2015
+12 August 2017
 
 OVERVIEW:
 
@@ -103,3 +103,37 @@ Description: This script takes a blast output file and finds the hits in the ori
 Note that this file was extensively reworked during development and contains a lot of additional functionality currently commented out.  The current version is the version that was used in the final analyses in our published work but we kept the code because it might be useful for future analyses.
 
 Dependencies: Commented-out sections require BLAST and MOTHUR.  This script uses the POSIX perl module.
+
+	perl blastseqs.postblast.pl <BLAST csv output file> <fasta file that was BLASTed> <KEGGur taxonomy file> <cutoff % of sequence that must match query, 0-1> <output directory> <names file that matches BLASTed file>
+
+UPDATE:
+Some modified scripts were written to handle mothur data that uses a count table instead of names and groups files.  Also, the keggur.pl script was split into two sections -- the "pulldown" section which gathers sequences from KEGG, and the rest of the script, which aligns sequences and produces blast databases.  This was done to accomodate the insertion of user-supplied sequences to the KEGG sequences.
+
+keggur.pulldown.pl
+keggur.man.pl
+
+These scripts take the same arguments as the original keggur.pl script.  Each is 1/2 of the keggur.pl script.  keggur.pulldown.pl stops after the KEGG database sequences are collected from the internet.  keggur.man.pl proceeds withe the alignment and other processing steps.  This allows introduction of user-curated sequences into the KEGG fasta file (and taxonomy files) prior to alignment.
+
+blastseqs.count.postblast.pl
+
+As blastseqs.postblast.pl, but takes a count_table instead of a groups file
+
+Syntax:
+	perl blastseqs.count.postblast.pl <BLAST csv output file> <fasta file that was BLASTed> <KEGGur taxonomy file> <cutoff % of sequence that must match query, 0-1> <output directory> <count_table that matches BLASTed file>
+
+manalign.count.pl
+
+Syntax exactly the same as manalign.pl; only change is the way that sequences are named in the output file, to facilitate use of the copyseqs.pl script to introduce copy numbers from the count table.
+
+fixnames.mod.pl
+
+Syntax as the fixnames.pl file. Modifications:
+1. "tab" character appropriate for LINUX as opposed to UNIX used
+2. Option to NOT use taxonomy file introduced (strange omission from original program)
+
+copyseqs.pl
+
+This program inserts replicate copies of a sequence into a fasta file based on counts within a count table file.  Note, this only works right now for one-group count table files and will blow up if you try to use more complex count tables. The purpose of this script is to make a mothur count table analyzed file amenable to quantitative analysis in pplacer. A superior script would directly modify the pplacer .jplace file, but I have not yet had time to figure out how to make that happen.
+
+Syntax:
+	perl copyseqs.pl <Sequence fasta file> <Output directory> <count table file that matches the sequence file>
