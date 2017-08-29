@@ -1,7 +1,7 @@
 # KEGGUR
 A suite of perl scripts for generating "good enough" phylogenetic databases using the Kyoto Encyclopedia of Genes and Genomes (KEGG)
 
-Metadata for this code prepository can be found at BCO-DMO: https://www.bco-dmo.org/dataset/636508
+An archival copy of this code repository, and metadata can be found at BCO-DMO: https://www.bco-dmo.org/dataset/636508
 
 NOTE: view this file as raw text, not html, as syntax assignments are represented using <> notation.
 
